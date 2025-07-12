@@ -3,7 +3,7 @@ from django.urls import path
 from .views import EmployeeAPIView, DepartmentAPIView, PositionAPIView, WorkScheduleAPIView, TaskAPIListView, \
     EmployeeAPIDetailView, TaskAPIDetailView, WorkScheduleAPIDetailView, EmployeeAPICreateView, \
     EmployeeAPIUpdateDestroyView, DepartmentAPICreateView, DepartmentAPIDetailView, DepartmentAPIUpdateView, \
-    PositionAPICreateView, PositionAPIDetailView, PositionAPIUpdateView
+    PositionAPICreateView, PositionAPIDetailView, PositionAPIUpdateView, PayrollRecordsView, PayrollRecordsByUserIDView
 
 urlpatterns = [
 
@@ -31,5 +31,9 @@ urlpatterns = [
 
     # Task urls
     path('task/', TaskAPIListView.as_view()),  # get-post
-    path('task/<int:pk>', TaskAPIDetailView.as_view())  # get-put-delete
+    path('task/<int:pk>', TaskAPIDetailView.as_view()),  # get-put-delete
+
+    # Payroll Records urls
+    path('payrollrecords/', PayrollRecordsView.as_view()),  # get
+    path('payrollrecords/user/<int:user_id>', PayrollRecordsByUserIDView.as_view()),  # get
 ]

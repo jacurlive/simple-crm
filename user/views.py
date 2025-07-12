@@ -1,10 +1,10 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Employee, Department, Position, WorkSchedule, Task
+from .models import Employee, Department, Position, WorkSchedule, Task, PayrollRecord
 from .permissions import IsAdminRole
 from .serializers import EmployeeSerializer, DepartmentSerializer, PositionSerializer, WorkScheduleSerializer, \
-    TaskSerializer
+    TaskSerializer, PayrollRecordsSerializer
 
 
 class EmployeeAPIView(generics.ListAPIView):
@@ -105,3 +105,17 @@ class TaskAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Task.objects.filter(assign_to=self.request.user)
+
+
+class PayrollRecordsView(generics.ListAPIView):
+    queryset = PayrollRecord.objects.all()
+    serializer_class = PayrollRecordsSerializer
+
+
+class PayrollRecordsByUserIDView(generics.ListAPIView):
+    queryset = PayrollRecord
+    serializer_class = PayrollRecordsSerializer
+
+    def get_queryset(self):
+        user_id = self.kwargs['user_id']
+        return PayrollRecord.objects.filter(employee=user_id)

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
-from .models import Department, Position, WorkSchedule, Task
+from .models import Department, Position, WorkSchedule, Task, PayrollRecord
 
 
 User = get_user_model()
@@ -51,4 +51,10 @@ class WorkScheduleSerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
+        fields = "__all__"
+
+
+class PayrollRecordsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PayrollRecord
         fields = "__all__"
